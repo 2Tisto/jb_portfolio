@@ -1,30 +1,82 @@
+import { ArrowUpRight, Download, Mail } from 'lucide-react';
+import { site } from '../data/site';
+import Typewriter from './Typewriter';
+
 export default function Hero() {
   return (
-    <section id="accueil" className="snap-section bg-[#0a0a0a]">
-      {/* On ajoute un padding top pour compenser la nav si nécessaire, 
-          mais avec snap-section, le centrage flex gère souvent bien l'espace */}
-      <div className="max-w-6xl w-full pt-20 md:pt-0">
-        <div className="mb-6 flex items-center gap-3">
-          <span className="px-2 py-1 bg-[#00ff41] text-black text-[10px] font-bold">STAGIAIRE_RECRUTABLE</span>
-          <span className="text-[10px] text-[#00ff41] animate-pulse">● CONNECTION_ESTABLISHED</span>
-        </div>
-        
-        <h1 className="text-[10vw] font-black leading-none uppercase tracking-tighter text-white">
-          <span className="text-[#00ff41]">VIGNONFODO</span><br/>
-          JEAN-BAPTISTE<span className="cursor-blink text-[#00ff41]"></span>
-        </h1>
+    <section id="accueil" className="relative min-h-screen overflow-hidden pt-28">
+      <div className="pointer-events-none absolute inset-0 mesh" />
+      <div className="pointer-events-none absolute inset-0 dots opacity-40" />
 
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-10">
-          <div className="text-slate-400 text-lg md:text-xl border-l-2 border-[#00ff41] pl-6">
-            <p className="mb-4">&gt; apt-get install expertise</p>
-            <p>Backend Engineer & Security Analyst.</p>
-            <p className="text-[#00ff41]/70 font-bold mt-2">Disponible pour Stage (2026)</p>
+      <div className="relative mx-auto grid min-h-[calc(100vh-7rem)] max-w-6xl items-center gap-12 px-5 pb-16 md:grid-cols-2 md:px-8 lg:gap-16">
+        <div>
+          <div className="inline-flex items-center gap-2 rounded-full border border-accent/25 bg-accent/10 px-3 py-1 text-xs font-medium text-accent">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
+            {site.availability}
           </div>
-          
-          <div className="flex flex-col justify-end items-start md:items-end font-mono text-xs space-y-2 opacity-50">
-            <span>IP_REMOTE: 192.168.1.XX</span>
-            <span>OS: KALI_LINUX_PRO</span>
-            <span>ROOT: GRANTED</span>
+
+          <h1 className="font-display mt-6 text-5xl font-extrabold leading-[0.95] tracking-tight text-white sm:text-6xl lg:text-7xl">
+            {site.firstName}
+            <br />
+            {site.lastName}
+          </h1>
+
+          <p className="mt-6 text-lg text-slate-300 sm:text-xl">
+            Je m&apos;intéresse à{' '}
+            <Typewriter words={site.roles} className="font-semibold text-accent" />
+          </p>
+
+          <p className="mt-5 max-w-lg text-base leading-relaxed text-slate-400 sm:text-lg">
+            Étudiant en informatique, je construis du backend et j&apos;apprends à le sécuriser. Curieux, orienté
+            pratique, prêt pour un stage en 2026.
+          </p>
+
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a
+              href="#projets"
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-ink transition hover:brightness-110"
+            >
+              Voir mes projets
+              <ArrowUpRight size={16} />
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-white/30"
+            >
+              <Mail size={16} />
+              Me contacter
+            </a>
+            {site.cv ? (
+              <a href={site.cv} className="inline-flex items-center gap-2 px-2 text-sm text-slate-400 hover:text-white">
+                <Download size={16} />
+                Télécharger mon CV
+              </a>
+            ) : null}
+          </div>
+        </div>
+
+        <div className="relative mx-auto w-full max-w-md">
+          <div className="absolute -right-6 -top-6 h-28 w-28 rounded-full bg-accent/20 blur-3xl" />
+          <div className="absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-accent-2/25 blur-3xl" />
+
+          <div className="glass lift relative overflow-hidden rounded-[2rem] p-3">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.6rem] bg-gradient-to-br from-[#142033] via-[#0c1524] to-[#071018]">
+              {site.portrait ? (
+                <img src={site.portrait} alt={site.name} className="h-full w-full object-cover" />
+              ) : (
+                <div className="flex h-full flex-col items-center justify-center">
+                  <span className="font-display text-7xl font-extrabold text-white/90">{site.short}</span>
+                  <span className="mt-3 text-sm tracking-[0.25em] text-slate-400 uppercase">Portfolio</span>
+                </div>
+              )}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent" />
+            </div>
+            <div className="absolute left-6 top-8 rounded-full border border-white/10 bg-[#070a12]/80 px-3 py-1.5 text-xs text-white backdrop-blur">
+              Backend · Cybersécurité
+            </div>
+            <div className="absolute bottom-8 right-6 rounded-full border border-white/10 bg-[#070a12]/80 px-3 py-1.5 text-xs text-white backdrop-blur">
+              Stage 2026
+            </div>
           </div>
         </div>
       </div>

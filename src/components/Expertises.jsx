@@ -1,24 +1,36 @@
-export default function Expertises() {
-  const skills = [
-    { name: "JAVA_ENVIRONMENT", list: ["Spring Security", "Multithreading", "Hibernate"] },
-    { name: "PHP_SECURITY", list: ["Secure Coding", "Laravel", "CSRF/XSS Protection"] },
-    { name: "C++_BAS_NIVEAU", list: ["Socket Programming", "Memory Management", "Pointers"] },
-    { name: "CYBER_OPS", list: ["Pentesting", "Network Auditing", "Encryption (AES/RSA)"] }
-  ];
+import { Code2, Lock, Network, Server } from 'lucide-react';
+import { skills } from '../data/site';
+import { Pill, Section } from './Section';
 
+const icons = [Server, Lock, Network, Code2];
+
+export default function Expertises() {
   return (
-    <section id="expertises" className="snap-section bg-black">
-      <h2 className="text-2xl font-bold mb-10 uppercase tracking-[0.5em] text-[#00ff41]">&gt;_COMPÉTENCES</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {skills.map((s, i) => (
-          <div key={i} className="hacker-card">
-            <h3 className="text-[#00ff41] font-bold mb-4"># {s.name}</h3>
-            <ul className="text-slate-500 text-sm space-y-1">
-              {s.list.map(item => <li key={item}>[+] {item}</li>)}
-            </ul>
-          </div>
-        ))}
+    <Section
+      id="competences"
+      kicker="Compétences"
+      title="Ce que je construis au quotidien."
+      intro="Un socle backend, des bases réseau, et la sécurité comme réflexe — pas comme décoration."
+    >
+      <div className="grid gap-4 sm:grid-cols-2">
+        {skills.map((skill, i) => {
+          const Icon = icons[i % icons.length];
+          return (
+            <article key={skill.name} className="glass lift rounded-[1.75rem] p-6 md:p-7">
+              <div className="mb-5 grid h-11 w-11 place-items-center rounded-2xl bg-accent/15 text-accent">
+                <Icon size={20} />
+              </div>
+              <h3 className="font-display text-xl font-bold text-white">{skill.name}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-400">{skill.hint}</p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {skill.items.map((item) => (
+                  <Pill key={item}>{item}</Pill>
+                ))}
+              </div>
+            </article>
+          );
+        })}
       </div>
-    </section>
+    </Section>
   );
 }
