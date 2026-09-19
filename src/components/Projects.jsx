@@ -1,41 +1,39 @@
-export default function Projects() {
-  const projs = [
-    {
-      id: "01",
-      title: "PACKET_SNIFFER_CPP",
-      desc: "Analyseur de trafic réseau en C++ capable de capturer et décoder les paquets TCP/IP en temps réel.",
-      tech: "C++ / RAW_SOCKETS"
-    },
-    {
-      id: "02",
-      title: "SECURE_AUTH_JAVA",
-      desc: "Système d'authentification centralisé avec chiffrement asymétrique et protection contre les attaques par force brute.",
-      tech: "JAVA / SPRING / JWT"
-    },
-    {
-      id: "03",
-      title: "PHP_VULN_SCANNER",
-      desc: "Outil automatisé de scan de vulnérabilités Web (SQLi, LFI) développé spécifiquement pour les audits internes.",
-      tech: "PHP / SECURITY"
-    }
-  ];
+import { nextSteps, projects } from '../data/site';
+import { Pill, Section } from './Section';
 
+export default function Projects() {
   return (
-    <section id="projets" className="snap-section">
-      <h2 className="text-2xl font-bold mb-10 uppercase tracking-[0.5em] text-[#00ff41]">&gt;_RÉALISATIONS</h2>
-      <div className="flex flex-col gap-4">
-        {projs.map(p => (
-          <div key={p.id} className="hacker-card group cursor-pointer">
-            <div className="flex justify-between items-start mb-2">
-              <span className="text-white font-bold tracking-widest">{p.title}</span>
-              <span className="text-[10px] text-[#00ff41]">{p.tech}</span>
+    <Section
+      id="projets"
+      kicker="Projets"
+      title="Des réalisations concrètes."
+      intro="Trois projets pour comprendre le trafic, protéger l’accès, et chercher les failles avant qu’elles ne le soient."
+    >
+      <div className="grid gap-4 md:grid-cols-3">
+        {projects.map((project) => (
+          <article key={project.id} className="glass lift flex flex-col rounded-[1.75rem] p-6 md:p-7">
+            <span className="text-xs font-semibold tracking-[0.2em] text-accent">{project.id}</span>
+            <h3 className="font-display mt-3 text-2xl font-bold text-white">{project.title}</h3>
+            <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-400">{project.desc}</p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {project.tags.map((tag) => (
+                <Pill key={tag}>{tag}</Pill>
+              ))}
             </div>
-            <p className="text-slate-500 text-xs leading-relaxed group-hover:text-slate-300 transition-colors">
-              {p.desc}
-            </p>
-          </div>
+          </article>
         ))}
       </div>
-    </section>
+
+      <div className="glass mt-10 rounded-[1.75rem] p-6 md:p-8">
+        <h3 className="font-display text-xl font-bold text-white">Ce que je construis ensuite</h3>
+        <ul className="mt-5 grid gap-3 md:grid-cols-3">
+          {nextSteps.map((item) => (
+            <li key={item} className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-4 text-sm leading-relaxed text-slate-300">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Section>
   );
 }
